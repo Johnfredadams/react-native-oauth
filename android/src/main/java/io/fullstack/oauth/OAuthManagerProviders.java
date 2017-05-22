@@ -29,6 +29,7 @@ import com.github.scribejava.apis.GoogleApi20;
 import com.github.scribejava.apis.GitHubApi;
 
 import com.github.scribejava.apis.SlackApi;
+import com.github.scribejava.apis.KlemiApi;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableArray;
@@ -65,6 +66,8 @@ public class OAuthManagerProviders {
       return OAuthManagerProviders.githubService(params, opts, callbackUrl);
     } else if (providerName.equalsIgnoreCase("slack")) {
       return OAuthManagerProviders.slackService(params, opts, callbackUrl);
+    } else if (providerName.equalsIgnoreCase("klemi")) {
+      return OAuthManagerProviders.klemiService(params, opts, callbackUrl);    
     } else {
       return null;
     }
@@ -197,6 +200,21 @@ public class OAuthManagerProviders {
     ServiceBuilder builder = OAuthManagerProviders._oauth2ServiceBuilder(cfg, opts, callbackUrl);
     return builder.build(GitHubApi.instance());
   }
+  
+  /*  Inserted by JFA 19/05/2017 */
+  
+  
+  private static OAuth20Service klemiService(
+    final HashMap cfg, 
+    @Nullable final ReadableMap opts,
+    final String callbackUrl)
+  {
+
+    ServiceBuilder builder = OAuthManagerProviders._oauth2ServiceBuilder(cfg, opts, callbackUrl);
+    return builder.build(KlemiApi.instance());
+  }
+  
+  /* end of insertion */
 
   private static OAuth20Service slackService(
     final HashMap cfg, 

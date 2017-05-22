@@ -443,13 +443,22 @@ class OAuthManagerModule extends ReactContextBaseJavaModule {
     resp.putString("status", "ok");
     resp.putBoolean("authorized", true);
     resp.putString("provider", providerName);
+    
     try {
-      String uuid = (String) accessTokenMap.get("user_id");
-      response.putString("uuid", uuid);
-    } catch (Exception ex) {
-      Log.e(TAG, "Exception while getting the access token");
-      ex.printStackTrace();
-    }
+       String uuid = "";
+
+       if(accessTokenMap.get("user_id") instanceof Double){
+         Log.e(TAG, "this is a double");
+         uuid = (String) accessTokenMap.get("user_id").toString();
+       } else {
+         uuid = (String) accessTokenMap.get("user_id");
+         
+       }
+       response.putString("uuid", uuid);
+     } catch (Exception ex) {
+       Log.e(TAG, "Exception while getting the access token");
+       ex.printStackTrace();
+     }
     
     WritableMap credentials = Arguments.createMap();
     Log.d(TAG, "Credential raw response: " + accessToken.getRawResponse());
