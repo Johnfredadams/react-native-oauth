@@ -28,11 +28,11 @@ public class KlemiApi extends DefaultApi20 {
 
     @Override
     public String getAccessTokenEndpoint() {
-        return "http://emmanuel.loc.al:3000/oauth/token";
+        return "http://auth.klemi.co/oauth/token";
     }
 
     @Override
     protected String getAuthorizationBaseUrl() {
-        return "http://emmanuel.loc.al:3000/oauth/authorize";
+        return "http://auth.klemi.co/oauth/authorize";
     }
 }
