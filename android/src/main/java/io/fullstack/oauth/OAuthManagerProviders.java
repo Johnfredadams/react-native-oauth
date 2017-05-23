@@ -30,6 +30,7 @@ import com.github.scribejava.apis.GitHubApi;
 
 import com.github.scribejava.apis.SlackApi;
 import com.github.scribejava.apis.KlemiApi;
+import com.github.scribejava.apis.CustomApi;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableArray;
@@ -69,7 +70,7 @@ public class OAuthManagerProviders {
     } else if (providerName.equalsIgnoreCase("klemi")) {
       return OAuthManagerProviders.klemiService(params, opts, callbackUrl);    
     } else {
-      return null;
+      return OAuthManagerProviders.customService(params, opts, callbackUrl);
     }
   }
 
@@ -212,6 +213,16 @@ public class OAuthManagerProviders {
 
     ServiceBuilder builder = OAuthManagerProviders._oauth2ServiceBuilder(cfg, opts, callbackUrl);
     return builder.build(KlemiApi.instance());
+  }
+  
+  private static OAuth20Service customService(
+    final HashMap cfg, 
+    @Nullable final ReadableMap opts,
+    final String callbackUrl)
+  {
+
+    ServiceBuilder builder = OAuthManagerProviders._oauth2ServiceBuilder(cfg, opts, callbackUrl);
+    return builder.build(CustomApi.instance());
   }
   
   /* end of insertion */
